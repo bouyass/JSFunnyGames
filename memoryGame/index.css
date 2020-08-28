@@ -1,4 +1,12 @@
 #memoGame{
-    background-color: gray;
-    width: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 30% 0 ;
+    width: 350px;
+    height: 450px;
+}
+
+p{
+    padding: 0 37% 0 ;
+    font-size: 30px;;
 }
