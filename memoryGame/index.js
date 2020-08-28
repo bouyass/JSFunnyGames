@@ -29,9 +29,13 @@ const bindListener = function(i, element){
                 document.getElementById(imagesReturned).setAttribute('src',`images/image-blank.png`);
                 document.getElementById(i).setAttribute('src',`images/image-blank.png`);
                 imagesReturned = undefined; 
+                /* all matchs are found */ 
                 if(score === 8){
                     document.querySelector('p').innerHTML = "Congratulations";
                     clearInterval(myVar);
+                    for(let i=0;i<imageElements.length;i++){
+                        removeListeners(imageElements[i], this);
+                    }
                 }
             }else{
                 element.setAttribute('src',`images/image-${board[i][1]}.png`);
@@ -88,4 +92,7 @@ function myTimer () {
     }
 };
 
-
+/* remove listeners whene game is finished*/ 
+const removeListeners = function(element, clickFunction){
+    element.removeEventListener('click', clickFunction)
+}
