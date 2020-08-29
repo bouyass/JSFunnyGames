@@ -30,11 +30,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
 const startTrack = function(){
     window.addEventListener('keyup', function(e){
         if(e.key == currentPosition){
-            console.log(e.key+ " et "+ currentPosition);
             score++;
             scoreElement.textContent = score;
-        }
-        
+        }  
     });
 };
 
