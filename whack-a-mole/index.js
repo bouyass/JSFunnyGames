@@ -1,12 +1,14 @@
 var cellsIds = [0,1,2,3,4,5,6,7,8];
-var lastCell = 0;
+var lastCell = 7;
 var score = 0;
 var currentPosition = undefined;
-var scoreElement = document.getElementById('score');
+var scoreElement = document.getElementById("score");
+var time = document.getElementById("time");
+var totalTime = 60;
 
 document.addEventListener("DOMContentLoaded", (event) => {
     startTrack();
-    startTimer();
+    time.textContent = totalTime;
     const moveMole = setInterval(mover,1500);
     function mover(){
         document.getElementById(lastCell).innerHTML = "";
@@ -16,19 +18,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
         element.setAttribute('src','images/monster.png');
         document.getElementById(cell).appendChild(element);
         currentPosition = cell;
+        totalTime--;
+        if(totalTime === 0){
+            windows.removeEventListener('keyup',this);
+        }else{
+            time.textContent = totalTime;
+        }
     } 
 });
 
 const startTrack = function(){
     window.addEventListener('keyup', function(e){
-        console.log(e.key+ " et "+ currentPosition);
-        if(e.key === currentPosition){
-            scoreElement.innerHTML = score++;235796
+        if(e.key == currentPosition){
+            console.log(e.key+ " et "+ currentPosition);
+            score++;
+            scoreElement.textContent = score;
         }
+        
     });
 };
 
-const startTimer = function(){
 
-};
 
