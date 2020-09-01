@@ -1,6 +1,7 @@
-var size = 5;
+var size = 15;
 var board = document.getElementById('gameBoard');
 var turn = 'green';
+var level = 4;
 
 document.addEventListener('DOMContentLoaded', (event) => {
     initGame(); 
@@ -21,6 +22,16 @@ const initGame = function(){
         }
         board.appendChild(tr);
     }
+}
+
+// reset game
+const resetGame = function(){
+    for (let l = 0; l<size;l++){
+        for(let m = 0;m<size;m++){
+            document.getElementById(`row-${l}-${m}`).innerHTML = '';   
+        }
+    }
+    turn = "green";
 }
 
 // add click listeners to table cells 
@@ -49,7 +60,7 @@ const addListener = function(element){
     })
 }
 
-
+// check alignement function
 const checkGame = function (turn){
 
     let serie = 0;
@@ -59,10 +70,26 @@ const checkGame = function (turn){
         for(let m = 0;m<size;m++){
             if(document.getElementById(`${l}-${m}-${turn}`) !== null){
                 serie++;
-                // if 4 balls aligned, win
-                if(serie === 4){
+                // if 4 balls have been aligned, win
+                if(serie === level){
                     alert("The "+turn+" player won !!");
-                    reset();
+                    resetGame();
+                }
+            }else{
+                serie = 0;
+            }
+        }
+    }
+
+    // vertical check
+    for(let l = 0; l<size;l++){
+        for(let m = 0;m<size;m++){
+            if(document.getElementById(`${l}-${m}-${turn}`) !== null){
+                serie++;
+                // if 4 balls have been aligned, win
+                if(serie === level){
+                    alert("The "+turn+" player won !!");
+                    resetGame();
                 }
             }else{
                 serie = 0;
@@ -73,26 +100,35 @@ const checkGame = function (turn){
     // vertical check
     for (let l = 0; l<size;l++){
         for(let m = 0;m<size;m++){
-            if(document.getElementById(`${m}-${l}-${turn}`) !== null){
+            if(document.getElementById(`${l+m}-${m}-${turn}`) !== null){
                 serie++;
-                // if 4 balls aligned, win
-                if(serie === 4){
+                // if 4 balls have been aligned, win
+                if(serie === level){
                     alert("The "+turn+" player won !!");
-                    reset();
+                    resetGame();
                 }
             }else{
                 serie = 0;
             }
         }
     }
+
+    for (let l = 0; l<size;l++){
+        for(let m = 0;m<size;m++){
+            if(document.getElementById(`${l+m}-${m}-${turn}`) !== null){
+                serie++;
+                // if 4 balls have been aligned, win
+                if(serie === level){
+                    alert("The "+turn+" player won !!");
+                    resetGame();
+                }
+            }else{
+                serie = 0;
+            }
+        }
+    }
+
+    
     
 }
 
-const reset = function(){
-    for (let l = 0; l<size;l++){
-        for(let m = 0;m<size;m++){
-            document.getElementById(`row-${l}-${m}`).innerHTML = '';   
-        }
-    }
-    turn = "green";
-}
