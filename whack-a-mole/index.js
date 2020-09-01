@@ -33,6 +33,11 @@ const startTrack = function(){
             score++;
             scoreElement.textContent = score;
         }  
+        document.getElementById(e.key).style.background = 'white';
+    });
+
+    window.addEventListener('keypress', function(e){
+        document.getElementById(e.key).style.background = 'black';
     });
 };
 
